@@ -10,6 +10,28 @@ window.CODEVERSE_BREAK_SANDBOX={
   wrap(code,test,token){
     const safe=String(code||'');
     const harness=`<script>(function(){const TOKEN=${JSON.stringify(token)};const TEST=${JSON.stringify(test)};function send(ok,detail){parent.postMessage({type:'CODEVERSE_BREAK_RESULT',token:TOKEN,ok:!!ok,detail:String(detail||'')},'*')}function wait(fn){setTimeout(fn,80)}try{const target=document.querySelector(TEST.target);if(!target){send(false,'Target control not found.');return}if(TEST.type==='clickText'){target.click();wait(()=>{const e=document.querySelector(TEST.expect);send(!!e&&e.textContent.trim()===TEST.value,e?'Observed: '+e.textContent.trim():'Expected output element missing.')})}else if(TEST.type==='submitText'){target.addEventListener('submit',e=>{if(!e.defaultPrevented)send(false,'The submit event kept the browser default behavior.');else wait(()=>{const out=document.querySelector(TEST.expect);send(!!out&&out.textContent.trim()===TEST.value,out?'Observed: '+out.textContent.trim():'Expected result missing.')})});target.querySelector('button,[type=submit]')?.click()}else if(TEST.type==='clickSequence'){target.click();target.click();wait(()=>{const e=document.querySelector(TEST.expect);send(!!e&&e.textContent.trim()===TEST.value,e?'Observed: '+e.textContent.trim():'Count output missing.')})}else if(TEST.type==='toggle'){const before=document.querySelector(TEST.expect)?.hidden;target.click();wait(()=>{const e=document.querySelector(TEST.expect);const first=e&&!e.hidden!==before;target.click();wait(()=>{const second=e&&e.hidden===before;send(!!(first&&second),'Visibility before='+before+', after first='+(e&&!e.hidden)+', restored='+second)})})}}catch(err){send(false,err&&err.message||'Runtime exception')}})();<\/script>`;
-    return safe+`\n${harness}`;
+    return safe+'\n'+harness;
   }
 };
+
+(function(){
+  const E=window.CODEVERSE_BREAK_SANDBOX;
+  const $=id=>document.getElementById(id);
+  const editor=$('sandboxCode'),preview=$('sandboxPreview');
+  if(!E||!editor||!preview)return;
+  const saved=JSON.parse(localStorage.getItem('codeverse-break-sandbox')||'{}');
+  let index=Number.isInteger(saved.index)?Math.max(0,Math.min(saved.index,E.cases.length-1)):0;
+  let attempts=Number(saved.attempts)||0;
+  let solved=Array.isArray(saved.solved)?saved.solved:[];
+  let token='';
+  function save(){localStorage.setItem('codeverse-break-sandbox',JSON.stringify({index,attempts,solved}))}
+  function current(){return E.cases[index]}
+  function loadCase(){const c=current();$('sandboxTitle').textContent=c.title;$('sandboxGoal').textContent=c.test.pass;$('sandboxCase').textContent=`CASE ${String(index+1).padStart(3,'0')} / ${String(E.cases.length).padStart(3,'0')} · ${c.category}`;editor.value=c.starter;$('sandboxStatus').textContent=solved.includes(c.id)?'PASSED':'NOT TESTED';$('sandboxStatus').className='sandbox-status'+(solved.includes(c.id)?' pass':'');$('sandboxResult').textContent=solved.includes(c.id)?c.test.pass:'Inspect the failure. Fix the cause. Then run the test.';$('sandboxRuntime').textContent='READY';save()}
+  function run(){const c=current();attempts++;token=crypto.randomUUID?crypto.randomUUID():String(Date.now())+Math.random();$('sandboxAttempts').textContent=attempts;$('sandboxRuntime').textContent='RUNNING';$('sandboxStatus').textContent='TESTING';$('sandboxStatus').className='sandbox-status';$('sandboxResult').textContent='Executing the behavior test in the isolated preview…';preview.srcdoc=E.wrap(editor.value,c.test,token);save()}
+  window.addEventListener('message',e=>{if(e.source!==preview.contentWindow)return;const d=e.data||{};if(d.type!=='CODEVERSE_BREAK_RESULT'||d.token!==token)return;const c=current();$('sandboxRuntime').textContent='COMPLETE';$('sandboxStatus').textContent=d.ok?'PASS':'FAIL';$('sandboxStatus').className='sandbox-status '+(d.ok?'pass':'fail');$('sandboxResult').textContent=d.ok?c.test.pass:(c.test.fail+' '+(d.detail||''));if(d.ok&&!solved.includes(c.id)){solved.push(c.id);save()}$('sandboxSolved').textContent=solved.length;save()});
+  $('sandboxRun').onclick=run;
+  $('sandboxReset').onclick=()=>{loadCase();$('sandboxSolved').textContent=solved.length};
+  $('sandboxPrev').onclick=()=>{index=Math.max(0,index-1);loadCase()};
+  $('sandboxNext').onclick=()=>{index=Math.min(E.cases.length-1,index+1);loadCase()};
+  $('sandboxSolved').textContent=solved.length;$('sandboxAttempts').textContent=attempts;loadCase();
+})();
