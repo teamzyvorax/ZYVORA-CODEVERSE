@@ -42,9 +42,10 @@ if(fs.existsSync('break-sandbox.js')){
  if(!src.includes('window.CODEVERSE_BREAK_SANDBOX'))fail.push('Break Sandbox global missing');
  if(!src.includes("type:'clickText'")||!src.includes("type:'finalBuild'"))fail.push('Break Sandbox runtime test types incomplete');
  if(!src.includes("type:'CODEVERSE_BREAK_RESULT'"))fail.push('Break Sandbox runtime result channel missing');
+ if(!src.includes('crypto.randomUUID')||!src.includes('e.source!==preview.contentWindow'))fail.push('Break Sandbox message isolation guard missing');
  for(let i=1;i<=20;i++){const id=`bug-${String(i).padStart(3,'0')}`;if(!src.includes(`id:'${id}'`))fail.push(`Break Sandbox missing ${id}`)}
 }
 if(fail.length){console.error('CODEVERSE QA FAILED');for(const x of fail)console.error(' - '+x);process.exit(1)}
 console.log('CODEVERSE QA PASSED');
-console.log('Static integrity checks: files, DOM ids, script references, mission catalogs, 20-case Break Sandbox.');
-console.log('Runtime/browser behavior still requires browser execution.');
+console.log('Static integrity checks: files, DOM ids, script references, mission catalogs, 20-case Break Sandbox, runtime isolation guards.');
+console.log('Browser-level behavior is covered by the optional runtime CI workflow.');
