@@ -12,7 +12,7 @@ for(let i=0;i<20;i++){
  await page.locator('#sandboxRun').click();await page.waitForTimeout(220);
  const runtime=await page.locator('#sandboxRuntime').textContent();const status=await page.locator('#sandboxStatus').textContent();
  if(runtime!=='COMPLETE')throw new Error(`Case ${i+1} runtime incomplete: ${runtime}`);
- if(!['PASS','FAIL'].includes(status))throw new Error(`Case ${i+1} invalid status: ${status}`);
+ if(!['PASS','FAIL'].includes(status))throw new Error(`Case ${i+1} invalid status: ${status}`);\n const proof=await page.locator('#sandboxProof').textContent();if(!proof?.includes('Isolated runtime')||!proof.includes('PASS'))throw new Error(`Case ${i+1} missing structured proof evidence: ${proof}`);
  if(i<19)await page.locator('#sandboxNext').click();
 }
 if(errors.length)throw new Error(`Browser page errors: ${errors.join(' | ')}`);
