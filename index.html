@@ -10,73 +10,15 @@
 </head>
 <body>
   <div class="grid"></div><div class="scan"></div>
-  <header class="nav">
-    <a class="brand" href="#top"><span>ZYVORA</span><b>CODEVERSE</b></a>
-    <nav><a href="#learn">Learn</a><a href="#build">Build</a><a href="#layers">30 Layers</a><a href="#portfolio">Portfolio</a></nav>
-    <button class="ghost" id="startBtn">ENTER CODEVERSE</button>
-  </header>
+  <header class="nav"><a class="brand" href="#top"><span>ZYVORA</span><b>CODEVERSE</b></a><nav><a href="#learn">Learn</a><a href="#build">Build</a><a href="#break">Break</a><a href="#remix">Remix</a><a href="#portfolio">Portfolio</a></nav><button class="ghost" id="startBtn">ENTER CODEVERSE</button></header>
   <main id="top">
-    <section class="hero">
-      <div class="eyebrow">DEVELOPER CREATION SYSTEM // v0.2</div>
-      <h1>DON'T JUST<br><em>WRITE CODE.</em><br>BUILD A MIND.</h1>
-      <p>Learn the concept. Think through the problem. Type it yourself. Break it. Debug it. Remix it. Prove what you built.</p>
-      <div class="actions"><button class="primary" id="heroStart">START BUILDING <span>→</span></button><a class="secondary" href="#learn">EXPLORE SYSTEM</a></div>
-      <div class="hero-stats"><span><strong>30</strong> verification layers</span><span><strong>1000+</strong> challenge potential</span><span><strong>0</strong> external creation tools</span></div>
-    </section>
-    <section id="learn" class="section">
-      <div class="section-head"><span>01 / LEARN</span><h2>UNDERSTAND BEFORE YOU BUILD.</h2></div>
-      <div class="cards three">
-        <article><i>01</i><h3>EXPLAIN</h3><p>Understand what an element does, why developers use it, where it belongs, and what can be built from it.</p></article>
-        <article><i>02</i><h3>THINK</h3><p>Plan your approach before touching the solution. Multiple valid approaches are encouraged.</p></article>
-        <article><i>03</i><h3>CREATE</h3><p>Use the given building blocks to make your own result instead of following a copy-paste recipe.</p></article>
-      </div>
-    </section>
-    <section id="build" class="section build-section">
-      <div class="section-head"><span>02 / BUILD LAB</span><h2>YOUR FIRST CREATION.</h2></div>
-      <div class="lab">
-        <div class="brief">
-          <div class="pill">MISSION 001 · BUILD</div><h3>Build a unique interactive card</h3>
-          <p>Use HTML, CSS and JavaScript. The goal is not to copy the preview. Make your own card that responds to a user action.</p>
-          <ul><li>Type your solution manually</li><li>Test the result instantly</li><li>Save versions as you improve</li></ul>
-          <div class="telemetry"><span>Edits <b id="editCount">0</b></span><span>Paste <b id="pasteCount">0</b></span></div>
-          <div id="pasteStatus" class="hint">No paste event detected in this session.</div>
-          <div class="build-actions"><button class="primary" id="runBtn">RUN & VERIFY →</button><button class="secondary" id="saveVersionBtn">SAVE VERSION</button></div>
-          <div id="result" class="result">Ready for your first build.</div>
-        </div>
-        <div class="editor">
-          <div class="editor-top"><span>HTML / CSS / JS</span><span class="dot"></span><span>LIVE PREVIEW</span></div>
-          <textarea id="code" spellcheck="false"><div class="card">
-  <h2>My Creation</h2>
-  <p>Built from zero.</p>
-  <button id="test">TEST ME</button>
-</div>
-<style>
-.card{padding:24px;border:1px solid #7c5cff;border-radius:18px;background:#0d1020;color:white;max-width:420px}
-button{padding:10px 16px;border-radius:10px;cursor:pointer}
-@media(max-width:600px){.card{padding:16px}}
-</style>
-<script>
-document.querySelector('#test').addEventListener('click',()=>{document.querySelector('#test').textContent='It works!'})
-</script></textarea>
-          <iframe id="preview" title="Live preview" sandbox="allow-scripts"></iframe>
-        </div>
-      </div>
-    </section>
-    <section id="layers" class="section layers-section">
-      <div class="section-head"><span>03 / VERIFICATION</span><h2>30 LAYERS. ONE CREATION.</h2></div>
-      <p class="lead">A project is not complete because it runs. It is complete when you understand it, test it, improve it and can prove what you built.</p>
-      <div class="layers" id="layerGrid"></div>
-    </section>
-    <section class="section journey">
-      <div class="section-head"><span>04 / DEVELOPER JOURNEY</span><h2>LEARN → BUILD → BREAK → REBUILD.</h2></div>
-      <div class="timeline"><div><b>01</b><strong>LEARN</strong><span>Understand the topic</span></div><div><b>02</b><strong>THINK</strong><span>Choose an approach</span></div><div><b>03</b><strong>BUILD</strong><span>Create from zero</span></div><div><b>04</b><strong>BREAK</strong><span>Find the failure</span></div><div><b>05</b><strong>DEBUG</strong><span>Fix the cause</span></div><div><b>06</b><strong>REMIX</strong><span>Make something new</span></div><div><b>07</b><strong>PUBLISH</strong><span>Show your journey</span></div></div>
-    </section>
-    <section id="portfolio" class="section portfolio">
-      <div class="section-head"><span>05 / PORTFOLIO</span><h2>SHOW THE JOURNEY, NOT JUST THE RESULT.</h2></div>
-      <div class="portfolio-card"><div class="profile"><div class="avatar">Z</div><div><h3>Your Developer Profile</h3><p>Think. Build. Break. Debug. Create.</p></div></div><div class="metrics"><div><b id="projectCount">0</b><span>Creations</span></div><div><b>0</b><span>Challenges</span></div><div><b>0</b><span>Bugs fixed</span></div><div><b id="verifiedMetric">0%</b><span>Verified</span></div></div><div class="project-placeholder"><span>YOUR CREATIONS WILL APPEAR HERE</span><small>Each project preserves its idea, versions, tests, improvements and final live demo.</small></div></div>
-    </section>
-  </main>
-  <footer><span>ZYVORA CODEVERSE</span><span>BUILD BEYOND CODE.</span></footer>
-  <script src="app.js"></script>
-</body>
-</html>
+    <section class="hero"><div class="eyebrow">DEVELOPER CREATION SYSTEM // v0.3</div><h1>DON'T JUST<br><em>WRITE CODE.</em><br>BUILD A MIND.</h1><p>Learn the concept. Think through the problem. Type it yourself. Break it. Debug it. Remix it. Prove what you built.</p><div class="actions"><button class="primary" id="heroStart">START BUILDING <span>→</span></button><a class="secondary" href="#learn">EXPLORE SYSTEM</a></div><div class="hero-stats"><span><strong>30</strong> verification layers</span><span><strong>1000+</strong> challenge potential</span><span><strong>0</strong> external creation tools</span></div></section>
+    <section id="learn" class="section"><div class="section-head"><span>01 / LEARN</span><h2>UNDERSTAND BEFORE YOU BUILD.</h2></div><div class="cards three"><article><i>01</i><h3>EXPLAIN</h3><p>Understand what an element does, why developers use it, where it belongs, and what can be built from it.</p></article><article><i>02</i><h3>THINK</h3><p>Plan your approach before touching the solution. Multiple valid approaches are encouraged.</p></article><article><i>03</i><h3>CREATE</h3><p>Use building blocks to make your own result instead of following a copy-paste recipe.</p></article></div></section>
+    <section id="build" class="section build-section"><div class="section-head"><span>02 / BUILD LAB</span><h2>YOUR FIRST CREATION.</h2></div><div class="lab"><div class="brief"><div class="pill">MISSION 001 · BUILD</div><h3>Build a unique interactive card</h3><p>Use HTML, CSS and JavaScript. Make your own card that responds to a user action.</p><ul><li>Type your solution manually</li><li>Test instantly</li><li>Save versions as you improve</li></ul><div class="telemetry"><span>Edits <b id="editCount">0</b></span><span>Paste <b id="pasteCount">0</b></span><span>Versions <b id="versionCount">0</b></span></div><div id="pasteStatus" class="hint">No paste event detected in this session.</div><div class="build-actions"><button class="primary" id="runBtn">RUN & VERIFY →</button><button class="secondary" id="saveVersionBtn">SAVE VERSION</button></div><div id="result" class="result">Ready for your first build.</div></div><div class="editor"><div class="editor-top"><span>HTML / CSS / JS</span><span class="dot"></span><span>LIVE PREVIEW</span></div><textarea id="code" spellcheck="false"><div class="card"><h2>My Creation</h2><p>Built from zero.</p><button id="test">TEST ME</button></div><style>.card{padding:24px;border:1px solid #7c5cff;border-radius:18px;background:#0d1020;color:white;max-width:420px}button{padding:10px 16px;border-radius:10px;cursor:pointer}@media(max-width:600px){.card{padding:16px}}</style><script>document.querySelector('#test').addEventListener('click',()=>{document.querySelector('#test').textContent='It works!'})</script></textarea><iframe id="preview" title="Live preview" sandbox="allow-scripts"></iframe></div></div></section>
+    <section id="break" class="section lab-section"><div class="section-head"><span>03 / BREAK + DEBUG LAB</span><h2>DON'T FEAR THE BUG. HUNT IT.</h2></div><div class="challenge-card"><div><div class="pill">MISSION 002 · DEBUG</div><h3>Find the broken interaction</h3><p>The button is supposed to change its text, but the selector is wrong. Diagnose the cause, fix it, then explain why the original failed.</p><div class="bug-code"><span>&lt;button id="run"&gt;Run&lt;/button&gt;</span><span>document.querySelector('#start')</span><span>.addEventListener('click', fixMe);</span></div></div><div class="debug-panel"><label for="debugAnswer">Your diagnosis</label><textarea id="debugAnswer" placeholder="What is wrong? What would you change?"></textarea><button class="primary" id="debugBtn">CHECK DIAGNOSIS →</button><div id="debugResult" class="result">No solution shown. Think first.</div></div></div></section>
+    <section id="remix" class="section lab-section"><div class="section-head"><span>04 / REMIX LAB</span><h2>ONE BUILD. A NEW PURPOSE.</h2></div><div class="cards three"><article><i>R1</i><h3>CARD → PRODUCT</h3><p>Turn your interactive card into a small product landing component.</p><button class="secondary remix-btn" data-remix="product">START REMIX</button></article><article><i>R2</i><h3>CARD → DASHBOARD</h3><p>Transform the same interaction into a dashboard status widget.</p><button class="secondary remix-btn" data-remix="dashboard">START REMIX</button></article><article><i>R3</i><h3>CARD → TOOL</h3><p>Turn the component into a useful mini tool with input and validation.</p><button class="secondary remix-btn" data-remix="tool">START REMIX</button></article></div><div id="remixResult" class="result">Choose a remix target. There is no single correct design.</div></section>
+    <section id="layers" class="section layers-section"><div class="section-head"><span>05 / VERIFICATION</span><h2>30 LAYERS. ONE CREATION.</h2></div><p class="lead">A project is not complete because it runs. It is complete when you understand it, test it, improve it and can prove what you built.</p><div class="layers" id="layerGrid"></div></section>
+    <section class="section journey"><div class="section-head"><span>06 / DEVELOPER JOURNEY</span><h2>LEARN → BUILD → BREAK → REBUILD.</h2></div><div class="timeline"><div><b>01</b><strong>LEARN</strong><span>Understand</span></div><div><b>02</b><strong>THINK</strong><span>Plan</span></div><div><b>03</b><strong>BUILD</strong><span>Create</span></div><div><b>04</b><strong>BREAK</strong><span>Find failure</span></div><div><b>05</b><strong>DEBUG</strong><span>Fix cause</span></div><div><b>06</b><strong>REMIX</strong><span>Transform</span></div><div><b>07</b><strong>PUBLISH</strong><span>Show journey</span></div></div><div class="journey-stats"><span>Current stage <b id="stageMetric">BUILDER</b></span><span>Bugs fixed <b id="bugsMetric">0</b></span><span>Versions <b id="journeyVersionMetric">0</b></span></div></section>
+    <section id="portfolio" class="section portfolio"><div class="section-head"><span>07 / PORTFOLIO</span><h2>SHOW THE JOURNEY, NOT JUST THE RESULT.</h2></div><div class="portfolio-card"><div class="profile"><div class="avatar">Z</div><div><h3>Your Developer Profile</h3><p>Think. Build. Break. Debug. Create.</p></div></div><div class="metrics"><div><b id="projectCount">0</b><span>Creations</span></div><div><b id="challengeMetric">0</b><span>Challenges</span></div><div><b id="bugsPortfolio">0</b><span>Bugs fixed</span></div><div><b id="verifiedMetric">0%</b><span>Verified</span></div></div><div class="project-placeholder"><span id="journeySummary">YOUR CREATION JOURNEY WILL APPEAR HERE</span><small>Idea → Plan → Build → Errors → Debug → V1 → Improve → V2 → Final.</small></div></div></section>
+  </main><footer><span>ZYVORA CODEVERSE</span><span>BUILD BEYOND CODE.</span></footer><script src="app.js"></script>
+</body></html>
