@@ -22,6 +22,7 @@ jobs:
           node --check validator.js
           node --check missions.js
           node --check debug-missions.js
+          node --check break-sandbox.js
           node --check qa-check.js
       - name: CodeVerse integrity checks
         run: node qa-check.js
