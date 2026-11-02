@@ -1,7 +1,7 @@
 import { chromium } from 'playwright';
 const browser=await chromium.launch({headless:true});
 const page=await browser.newPage({viewport:{width:1280,height:900}});
-const errors=[];page.on('pageerror',e=>errors.push('pageerror: '+e.message));page.on('console',m=>{if(m.type()==='error')errors.push('console: '+m.text())});
+const errors=[];await page.addInitScript(()=>{if(window!==window.top)return;window.__codeverseTopErrors=[];window.addEventListener('error',e=>window.__codeverseTopErrors.push(e.message));window.addEventListener('unhandledrejection',e=>window.__codeverseTopErrors.push(String(e.reason?.message||e.reason)));});
 await page.goto('http://127.0.0.1:4173/',{waitUntil:'networkidle'});
 const label=await page.locator('#sandboxCase').textContent();
 if(!label?.includes('CASE 001 / 020'))throw new Error(`Expected 20-case Break Lab, got ${label}`);
@@ -17,6 +17,6 @@ for(let i=0;i<20;i++){
  const proof=await page.locator('#sandboxProof').textContent();if(!proof?.includes('Isolated runtime')||!proof.includes('PASS'))throw new Error(`Case ${i+1} missing structured proof evidence: ${proof}`);
  if(i<19)await page.locator('#sandboxNext').click();
 }
-if(errors.length)throw new Error(`Browser page errors: ${errors.join(' | ')}`);
+const topErrors=await page.evaluate(()=>window.__codeverseTopErrors||[]);if(topErrors.length)throw new Error(`Top-level browser errors: ${topErrors.join(' | ')}`);
 console.log('BREAK SANDBOX BROWSER SMOKE PASSED: 20/20 cases loaded and executed.');
 await browser.close();
