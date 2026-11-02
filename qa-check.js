@@ -1,5 +1,5 @@
 const fs=require('fs');
-const files=['index.html','app.js','validator.js','missions.js','debug-missions.js','break-sandbox.js'];
+const files=['index.html','app.js','validator.js','missions.js','debug-missions.js','break-sandbox.js','tests/break-sandbox-smoke.mjs'];
 const fail=[];
 for(const file of files){if(!fs.existsSync(file))fail.push(`Missing file: ${file}`)}
 for(const file of ['app.js','validator.js','missions.js','debug-missions.js','break-sandbox.js']){
@@ -45,7 +45,13 @@ if(fs.existsSync('break-sandbox.js')){
  if(!src.includes('crypto.randomUUID')||!src.includes('e.source!==preview.contentWindow'))fail.push('Break Sandbox message isolation guard missing');
  for(let i=1;i<=20;i++){const id=`bug-${String(i).padStart(3,'0')}`;if(!src.includes(`id:'${id}'`))fail.push(`Break Sandbox missing ${id}`)}
 }
+if(fs.existsSync('tests/break-sandbox-smoke.mjs')){
+ const src=fs.readFileSync('tests/break-sandbox-smoke.mjs','utf8');
+ if(!src.includes('chromium'))fail.push('Browser smoke test missing Chromium runner');
+ if(!src.includes('CASE 001 / 020'))fail.push('Browser smoke test does not assert 20 cases');
+ if(!src.includes('#sandboxRun'))fail.push('Browser smoke test does not execute runtime tests');
+ if(!src.includes('#sandboxNext'))fail.push('Browser smoke test does not navigate cases');
+}
 if(fail.length){console.error('CODEVERSE QA FAILED');for(const x of fail)console.error(' - '+x);process.exit(1)}
 console.log('CODEVERSE QA PASSED');
-console.log('Static integrity checks: files, DOM ids, script references, mission catalogs, 20-case Break Sandbox, runtime isolation guards.');
-console.log('Browser-level behavior is covered by the optional runtime CI workflow.');
+console.log('Static integrity checks: files, DOM ids, script references, mission catalogs, 20-case Break Sandbox, runtime isolation guards, browser smoke test.');
