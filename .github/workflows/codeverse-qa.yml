@@ -1,0 +1,27 @@
+name: CodeVerse QA
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+    branches: [main]
+
+jobs:
+  static-qa:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+      - name: Setup Node
+        uses: actions/setup-node@v4
+        with:
+          node-version: 22
+      - name: JavaScript syntax checks
+        run: |
+          node --check app.js
+          node --check validator.js
+          node --check missions.js
+          node --check debug-missions.js
+          node --check qa-check.js
+      - name: CodeVerse integrity checks
+        run: node qa-check.js
