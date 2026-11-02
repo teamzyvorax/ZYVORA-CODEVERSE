@@ -9,7 +9,8 @@ if(await page.locator('#sandboxPreview').getAttribute('sandbox')!=='allow-script
 for(let i=0;i<20;i++){
  const current=await page.locator('#sandboxCase').textContent();
  if(!current?.includes(`CASE ${String(i+1).padStart(3,'0')} / 020`))throw new Error(`Case navigation mismatch: ${current}`);
- await page.locator('#sandboxRun').click();await page.waitForTimeout(220);
+ await page.locator('#sandboxRun').click();
+ await page.waitForFunction(()=>document.querySelector('#sandboxRuntime')?.textContent==='COMPLETE',{timeout:8000});
  const runtime=await page.locator('#sandboxRuntime').textContent();const status=await page.locator('#sandboxStatus').textContent();
  if(runtime!=='COMPLETE')throw new Error(`Case ${i+1} runtime incomplete: ${runtime}`);
  if(!['PASS','FAIL'].includes(status))throw new Error(`Case ${i+1} invalid status: ${status}`);
