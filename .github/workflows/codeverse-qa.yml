@@ -26,3 +26,20 @@ jobs:
           node --check qa-check.js
       - name: CodeVerse integrity checks
         run: node qa-check.js
+
+  browser-smoke:
+    runs-on: ubuntu-latest
+    needs: static-qa
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+      - name: Setup Node
+        uses: actions/setup-node@v4
+        with:
+          node-version: 22
+      - name: Install Playwright Chromium
+        run: npx --yes playwright@1.56.1 install --with-deps chromium
+      - name: Start local site
+        run: python3 -m http.server 4173 --bind 127.0.0.1 >/tmp/codeverse-http.log 2>&1 &
+      - name: Run Break Sandbox browser smoke test
+        run: node tests/break-sandbox-smoke.mjs
